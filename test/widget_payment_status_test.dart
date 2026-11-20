@@ -34,6 +34,17 @@ void main() {
     });
   });
 
+  group('SdkData partnerId', () {
+    test('is sent when set', () {
+      final map = SdkData(amount: 100, partnerId: 'seat-42').toMap();
+      expect(map['partnerId'], 'seat-42');
+    });
+    test('is left out when absent or empty', () {
+      expect(SdkData(amount: 100).toMap().containsKey('partnerId'), isFalse);
+      expect(SdkData(amount: 100, partnerId: '').toMap().containsKey('partnerId'), isFalse);
+    });
+  });
+
   group('SdkData payment methods', () {
     test('sends the method as the paymentMethods list the widget reads', () {
       final map = SdkData(amount: 100, paymentMethod: 'momo').toMap();

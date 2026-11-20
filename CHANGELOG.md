@@ -1,3 +1,9 @@
+## Unreleased
+
+- Webview widget (`KKiaPay`): new `partnerId` parameter, sent to the widget
+  so KkiaPay stores it on the transaction and a server can look the
+  transaction up by it (until now only `KKiaPayMoMo` had it).
+
 ## 1.2.0
 
 - **Fix**: the widget never showed the payment form. The page URL is now
