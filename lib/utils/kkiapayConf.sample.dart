@@ -43,6 +43,8 @@ class SdkData {
   /// @Params phone : Payment phoneNumber
   /// @Params data : Payment data send by webhook
   /// @Params sandbox : Payment request made in sandbox
+  /// @Params partnerId : Your own payment reference. KkiaPay stores it on the
+  /// transaction, so your server can look the transaction up by it.
   SdkData({
     this.amount,
     this.paymentMethod,
@@ -54,9 +56,13 @@ class SdkData {
     this.sandbox = true,
     this.apikey,
     this.theme = '#4E6BFC',
+    this.partnerId,
   });
 
   final int? amount;
+
+  /// Sent only when set (non-empty).
+  final String? partnerId;
   final reason, name, email, sandbox, phone, data, apikey, theme, paymentMethod;
 
   /// The widget only reads `paymentMethods`, as a list (`["momo"]`). Any
@@ -85,7 +91,8 @@ class SdkData {
       'theme': theme,
       'url': url,
       'host': host,
-      'data': data
+      'data': data,
+      if (partnerId != null && partnerId!.isNotEmpty) 'partnerId': partnerId,
     };
   }
 

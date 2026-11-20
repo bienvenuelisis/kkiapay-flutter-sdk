@@ -21,6 +21,10 @@ class KKiaPay extends StatefulWidget {
   final String? email;
   final PaymentMethod? paymentMethod;
 
+  /// @Params partnerId : Your own payment reference, stored by KkiaPay on
+  /// the transaction (e.g. an order or seat id your server looks up).
+  final String? partnerId;
+
 
   const KKiaPay({
     Key? key,
@@ -34,6 +38,7 @@ class KKiaPay extends StatefulWidget {
     this.theme,
     this.name,
     this.email,
+    this.partnerId,
   }) : super(key: key);
 
 
@@ -50,6 +55,7 @@ class KKiaPay extends StatefulWidget {
     this.theme,
     this.name,
     this.email,
+    this.partnerId,
   );
 
 }
@@ -68,6 +74,7 @@ class _KKiaPayState extends State<KKiaPay> with SingleTickerProviderStateMixin {
   final String? name;
   final String? email;
   final PaymentMethod? paymentMethod;
+  final String? partnerId;
 
 
 
@@ -82,6 +89,7 @@ class _KKiaPayState extends State<KKiaPay> with SingleTickerProviderStateMixin {
     this.theme, 
     this.name,
     this.email,
+    this.partnerId,
   );
 
 
@@ -102,7 +110,8 @@ class _KKiaPayState extends State<KKiaPay> with SingleTickerProviderStateMixin {
           'paymentMethod': paymentMethod,
           'sandbox': sandbox,
           'name':name,
-          'email': email
+          'email': email,
+          'partnerId': partnerId,
         });
       },
       builder: (context, model, child) =>  Scaffold(
@@ -120,7 +129,8 @@ class _KKiaPayState extends State<KKiaPay> with SingleTickerProviderStateMixin {
                   url: Utils.getUrl( SdkData(
                       amount: this.amount, paymentMethod: this.paymentMethod?.name,
                       phone: this.phone, data: this.data, sandbox: this.sandbox,
-                      apikey: this.apikey, theme: this.theme, name: this.name, email: this.email
+                      apikey: this.apikey, theme: this.theme, name: this.name, email: this.email,
+                      partnerId: this.partnerId,
                   ) ),
                   // The webview is removed from the tree as soon as the
                   // payment ends (hideWebView), so its own context is dead
